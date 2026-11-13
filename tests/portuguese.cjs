@@ -46,6 +46,8 @@ for (const [input, expected] of Object.entries({
 })) assert.equal(resolve(table, input), expected, input);
 assert.equal(resolve({ en: {}, pt: {} }, 'pt-BR'), 'pt', 'generic table fallback');
 assert.equal(resolve({ en: {} }, 'pt-PT'), 'en', 'untranslated table fallback');
+assert.equal(resolve({ en: {} }, 'constructor'), 'en', 'object prototype properties are not languages');
+assert.equal(resolve(Object.assign(Object.create({ fr: {} }), { en: {} }), 'fr'), 'en', 'inherited translation entries are ignored');
 const hass = { language: 'pt-PT', locale: { language: 'pt-BR' } };
 assert.equal(context.window.applianceLang(table, {}, hass), 'pt-BR', 'HA locale takes precedence');
 assert.equal(context.window.applianceLang(table, { language: 'pt_PT' }, hass), 'pt-PT', 'explicit override');

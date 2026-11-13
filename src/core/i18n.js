@@ -9,8 +9,8 @@ window.applianceResolveLanguage = (table, language) => {
   if (exact) return exact;
   let base = full.split('-')[0];
   if (base === 'no' || base === 'nn') base = 'nb';
-  if (base === 'pt' && table['pt-PT']) return 'pt-PT';
-  return table[base] ? base : 'en';
+  if (base === 'pt' && Object.prototype.hasOwnProperty.call(table, 'pt-PT')) return 'pt-PT';
+  return Object.prototype.hasOwnProperty.call(table, base) ? base : 'en';
 };
 const lang = (hass) => window.applianceResolveLanguage(STRINGS,
   (hass && (hass.locale?.language || hass.language)) || document.documentElement.lang || 'en');
