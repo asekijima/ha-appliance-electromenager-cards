@@ -1975,6 +1975,54 @@ ok('mini-pc energy tile hidden without entity',card('mini-pc',{entity_cpu:'senso
   ok(`Portuguese ${locale}: UPS editor runtime is autonomy`, form.computeLabel({name:'entity_runtime'})==='Autonomia' && form.computeLabel({name:'show_runtime'})==='Autonomia');
  }
 }
+// Newly synchronized upstream cards: regional names, selectors, overrides and real alerts.
+{
+ const cards = [
+  ['camera','Câmara','Câmera'], ['nvr','Gravador NVR','Gravador NVR'],
+  ['poe-switch','Switch PoE','Switch PoE'], ['water-filter','Filtro de água','Filtro de água'],
+  ['reef-aquarium','Aquário de recife','Aquário de recife'], ['raspberry-pi','Raspberry Pi','Raspberry Pi'],
+ ];
+ for (const [kind, pt, br] of cards) {
+  const tag='appliance-'+kind+'-card', C=customElements.get(tag), el=document.createElement(tag);
+  el.setConfig({animations:false}); document.getElementById('g').append(el);
+  for (const [locale, expected] of [['pt',pt],['pt-BR',br]]) {
+   el.hass=hassOf([],locale);
+   ok(`Portuguese sync ${kind}: ${locale} render`, el.shadowRoot.textContent.includes(expected));
+  }
+  el.setConfig({language:'pt_PT', animations:false}); el.hass=hassOf([], 'pt-BR');
+  ok(`Portuguese sync ${kind}: explicit alias overrides HA`, el._lang()==='pt-PT' && el.shadowRoot.textContent.includes(pt));
+  el.remove();
+  const ed=C.getConfigElement(); ed.hass=hassOf([], 'pt-BR'); ed.setConfig({});
+  const fields=[...ed.querySelectorAll('ha-form')].flatMap(f=>f.schema||[]), field=fields.find(f=>f.name==='language');
+  ok(`Portuguese sync ${kind}: shared selector`, field?.selector.select.options.some(o=>o.value==='pt-PT'&&o.label==='Português (Portugal)') && field.selector.select.options.some(o=>o.value==='pt-BR'&&o.label==='Português (Brasil)'));
+ }
+ for (const locale of ['pt', 'pt-BR']) {
+  const pi=document.createElement('appliance-raspberry-pi-card');
+  pi.setConfig({entity_power_status:'binary_sensor.uv',animations:false}); document.getElementById('g').append(pi);
+  pi.hass=hassOf([mk('binary_sensor.uv','on')],locale);
+  ok(`Portuguese sync Raspberry Pi ${locale}: undervoltage alert`,pi.shadowRoot.getElementById('rpalert').textContent==='Subtensão: verifique a alimentação');
+  pi.remove();
+  const filter=document.createElement('appliance-water-filter-card');
+  filter.setConfig({entity_filter:'sensor.filter_life',filter_mode:'remaining',animations:false}); document.getElementById('g').append(filter);
+  filter.hass=hassOf([mk('sensor.filter_life',1,{unit_of_measurement:'%'})],locale);
+  ok(`Portuguese sync water filter ${locale}: replacement alert`,filter.shadowRoot.textContent.includes('Substitua o filtro agora'));
+  filter.remove();
+ }
+}
+// A translated PoE confirmation must name the port once and honor cancellation.
+for (const locale of ['pt','pt-BR']) {
+ const el=document.createElement('appliance-poe-switch-card'); el.setConfig({prefix:'pt_test',animations:false});
+ document.getElementById('g').append(el);
+ const h=hassOf([mk(el._ports[0].poe,'on')],locale); el.hass=h;
+ el.shadowRoot.querySelector('.port').dispatchEvent(new Event('click'));
+ let prompt=''; const previousConfirm=window.confirm;
+ try {
+  window.confirm=(message)=>{prompt=message;return false;};
+  el.shadowRoot.getElementById('bpoe').click();
+  ok(`Portuguese sync PoE ${locale}: translated confirmation`,prompt.startsWith('Desligar a alimentação PoE em Porta 1?')&&!prompt.includes('{port}'),prompt);
+  ok(`Portuguese sync PoE ${locale}: cancel keeps power on`,h.calls.length===0,JSON.stringify(h.calls));
+ } finally {window.confirm=previousConfirm;el.remove();}
+}
 window.RESULTS=R;
 const fails=R.filter(r=>!r.pass).length;
 document.getElementById('sum').innerHTML=`<b class="${fails?'f':'p'}">${R.length-fails} / ${R.length} tests réussis</b> — fichier testé : <code>dist/ha-appliance-electromenager-cards.js</code>`;

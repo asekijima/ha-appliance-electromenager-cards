@@ -15,7 +15,7 @@ entity_power: sensor.battery_power
 language: pt-BR  # or pt-PT
 ```
 
-The visual editor itself follows Home Assistant's language. Number formatting continues to respect the Home Assistant profile settings; an explicit card language takes precedence on standalone cards. Currency and temperature units follow the existing card settings.
+Shared visual editor labels follow Home Assistant's language; card-specific editor labels may follow the card's explicit language override. Number formatting continues to respect the Home Assistant profile settings; an explicit card language takes precedence on standalone cards. Currency and temperature units follow the existing card settings.
 
 ## Common options
 
