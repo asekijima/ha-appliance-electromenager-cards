@@ -6,7 +6,7 @@
 [![Validate](https://github.com/skyrotter/ha-appliance-electromenager-cards/actions/workflows/validate.yml/badge.svg)](https://github.com/skyrotter/ha-appliance-electromenager-cards/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/skyrotter/ha-appliance-electromenager-cards/blob/main/LICENSE)
 
-🇬🇧 English · [🇫🇷 Version française](https://github.com/skyrotter/ha-appliance-electromenager-cards/blob/main/README.fr.md) · [🇮🇹 Italiano](https://github.com/skyrotter/ha-appliance-electromenager-cards/blob/main/README.it.md) · [🇩🇪 Deutsch](https://github.com/skyrotter/ha-appliance-electromenager-cards/blob/main/README.de.md) · [🇪🇸 Español](https://github.com/skyrotter/ha-appliance-electromenager-cards/blob/main/README.es.md)
+🇬🇧 English · [🇫🇷 Français](README.fr.md) · [🇮🇹 Italiano](README.it.md) · [🇩🇪 Deutsch](README.de.md) · [🇪🇸 Español](README.es.md) · [🇵🇹 Português (Portugal)](README.pt-PT.md) · [🇧🇷 Português (Brasil)](README.pt-BR.md)
 
 ## ❤️ Support the project
 
