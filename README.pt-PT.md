@@ -206,6 +206,7 @@ Clique num cartão para consultar as opções e os exemplos.
 | Cartão | Tipo |
 |---|---|
 | [Estore de enrolar](docs/cards/shutters.md) | `custom:appliance-roller-shutter-card` |
+| [Cortinas deslizantes](docs/cards/sliding-curtain.md) | `custom:appliance-sliding-curtain-card` |
 | [Persiana veneziana](docs/cards/shutters.md) | `custom:appliance-venetian-blind-card` |
 | [Portadas](docs/cards/shutters.md) | `custom:appliance-swing-shutter-card` |
 | [Pérgula bioclimática](docs/cards/shutters.md) | `custom:appliance-pergola-card` |
@@ -261,6 +262,7 @@ Clique num cartão para consultar as opções e os exemplos.
 | [Gravador NVR (LEDs animados, disco, CPU)](docs/cards/camera.md) | `custom:appliance-nvr-card` |
 | [Switch PoE (SSCPOE / Steamemo GPS208, GPS204V, GPS105S)](docs/cards/poe-switch.md) | `custom:appliance-poe-switch-card` |
 | [Raspberry Pi 4 (CPU, temperatura, RAM, disco, rede, subtensão)](docs/cards/raspberry-pi.md) | `custom:appliance-raspberry-pi-card` |
+| [Coordenador Zigbee](docs/cards/zigbee-coordinator.md) | `custom:appliance-zigbee-coordinator-card` |
 | [Filtro de água (sob o lava-loiça, 1 a 3 cartuchos)](docs/cards/water-filter.md) | `custom:appliance-water-filter-card` |
 | [Portinhola para gatos (microchip, animais no interior / exterior)](docs/cards/cat-flap.md) | `custom:appliance-cat-flap-card` |
 | [Fonte de água para animais](docs/cards/pet-fountain.md) | `custom:appliance-pet-fountain-card` |
